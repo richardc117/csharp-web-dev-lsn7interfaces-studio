@@ -1,0 +1,56 @@
+﻿Here are a few behaviors that both CDs and DVDs share:
+
+    They both spin.
+    They both store data - Instance field (for capacity and list of data)
+    Data gets written to the discs by using a laser.
+    The data on the discs can be read by using a laser - Instance Field (Reads from list)
+    Once loaded, they both report information like name, capacity, contents, and disc type.
+
+    ^^All abstract class (base disc)
+
+    Plays Media (IMediaPlayable)
+    Spins Discs (IOpticalDisc)
+
+
+    public class CD : BaseDisc, IOpticalDisc
+    {
+        private const string discType = "CD";
+        private const int discMinSpeed = 200;
+        private const int discMaxSpeed = 500;
+        private const int discCapacity = 800;
+        public CD(string discLabel) : base(discLabel, discType, discMinSpeed, discMaxSpeed, discCapacity)
+        {
+
+        }
+
+         public abstract class BaseDisc
+    {
+        private static int nextId = 1;
+        private int diskId { get; }
+        private string DiscLabel { get; }
+        private string DiscType;
+        private int DiscMinSpeed;
+        private int DiscMaxSpeed;
+        private int DiscCapacity;
+        private int DiscFreeSpace;
+        private List<string> DiscData = new List<string>();
+        private bool DiscOpen = true;
+        
+        
+        public BaseDisc ()
+        {
+            diskId = nextId;
+            nextId++;
+        }
+
+        public BaseDisc (string discLabel, string discType, int discMinSpeed, int discMaxSpeed, int discCapacity) : this()
+        {
+            DiscLabel = discLabel;
+            DiscType = discType;
+            DiscMinSpeed = discMinSpeed;
+            DiscMaxSpeed = discMaxSpeed;
+            DiscCapacity = discCapacity;
+            DiscFreeSpace = discCapacity;
+        }
+
+
